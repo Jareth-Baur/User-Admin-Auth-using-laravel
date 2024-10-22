@@ -881,23 +881,50 @@
                                 Dashboard
                             </a>
                         @else
-                            <a
-                                href="{{ url('/auth') }}"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                id="navLoginButton">
-                                Log in
-                            </a>
+                            <!-- Select for Login -->
+                            <div class="relative">
+                                <select
+                                    class="rounded-md px-3 py-2 text-black bg-dark-gray text-white transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                    id="navLoginSelect"
+                                    style="background-color: #333; color: white; padding: 8px; border: 1px solid #555;">
+                                    <option value="" selected>Login</option>
+                                    <option value="{{ url('/login') }}">Login as User</option>
+                                    <option value="{{ url('admin/login') }}">Login as Admin</option>
+                                </select>
+                            </div>
 
                             @if (Route::has('register'))
-                                <a
-                                    href="{{ url('/auth') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    id="navRegisterButton">
-                                    Register
-                                </a>
+                                <div class="relative ms-3">
+                                    <select
+                                        class="rounded-md px-3 py-2 text-black bg-dark-gray text-white transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        id="navRegisterSelect"
+                                        style="background-color: #333; color: white; padding: 8px; border: 1px solid #555;">
+                                        <option value="" selected>Register</option>
+                                        <option value="{{ url('/register') }}">Register as User</option>
+                                        <option value="{{ url('admin/register') }}">Register as Admin</option>
+                                    </select>
+                                </div>
                             @endif
                         @endauth
                     </nav>
+
+                    <script>
+                        // JavaScript to handle the login selection
+                        document.getElementById('navLoginSelect').addEventListener('change', function () {
+                            var selectedUrl = this.value;
+                            if (selectedUrl) {
+                                window.location.href = selectedUrl;
+                            }
+                        });
+
+                        // JavaScript to handle the register selection
+                        document.getElementById('navRegisterSelect').addEventListener('change', function () {
+                            var selectedUrl = this.value;
+                            if (selectedUrl) {
+                                window.location.href = selectedUrl;
+                            }
+                        });
+                    </script>
                 @endif
             </header>
 
